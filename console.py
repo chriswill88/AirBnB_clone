@@ -142,6 +142,62 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def do_User(self, args):
+        """User type object"""
+        self.dispatch("User", args)
+
+    def do_Review(self, args):
+        """Review type object"""
+        self.dispatch("Review", args)
+
+    def do_Amenity(self, args):
+        """Amenity type object"""
+        self.dispatch("Amenity", args)
+
+    def do_Place(self, args):
+        """Place type object"""
+        self.dispatch("Place", args)
+
+    def do_State(self, args):
+        """State type object"""
+        self.dispatch("State", args)
+
+    def do_City(self, args):
+        """City type object"""
+        self.dispatch("City", args)
+
+    def do_BaseModel(self, args):
+        """BaseModel type object"""
+        self.dispatch("BaseModel", args)
+
+    def dispatch(self, cls, argv):
+        """dispatch Class.func() style calls to the right place"""
+        func = argv.split(".")[-1].split("(")[0]
+        args = argv.split("(")[-1].split(")")[0].split(", ")
+        if func == "all":
+            self.do_all(cls)
+        elif func == "show":
+            self.do_show(cls + " " + args[-1][1:-1])
+        elif func == "destroy":
+            self.do_destroy(cls + " " + args[-1][1:-1])
+        elif func == "update":
+            if len(args) != 3:
+                print("** too few arguments **")
+            arg2 = ""
+            for x in args[0:-1]:
+                arg2 = arg2 + x[1:-1] + " "
+            arg2 = arg2 + args[-1]
+            print(arg2)
+            self.do_update(cls + " " + arg2)
+        elif func == "count":
+            ct = 0
+            for k, i in storage.all().items():
+                if cls in str(i):
+                    ct = ct + 1
+            print(ct)
+        else:
+            print("** function doesn't exist **")
+
     def do_quit(self, args):
         """Quit command to exit the program"""
         storage.save()
