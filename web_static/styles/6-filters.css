@@ -9,6 +9,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    z-index: 0;
 }
 
 
@@ -76,9 +77,8 @@ button {
     padding-top: 1pc;
     padding-bottom: 1pc;
     border: 1px solid #DDDDDD;
-    z-index: 1;
     margin-left: -50px;
-    
+
 }
 
 .popover2 ul {
@@ -94,13 +94,13 @@ button {
     padding-top: 1pc;
     padding-bottom: 1pc;
     border: 1px solid #DDDDDD;
-    z-index: 1;
     margin-left: -50px;
 }
 
 .popover {
     position: unset;
     display: inline-block;
+    z-index: 1;
 }
 
 .popover:hover .popover1 {
